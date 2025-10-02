@@ -10,6 +10,9 @@
   # Proxy les appels front → API publique (ne rien strip, on garde /api/…)
   @api path /api*
   handle @api {
+    // Prod : URL relative (via proxy Caddy). Dev : .env local peut surcharger.
+const API_BASE = (import.meta.env.VITE_API_BASE ?? '').replace(/\/$/, '');
+
     reverse_proxy {$API_ORIGIN}
   }
 }
