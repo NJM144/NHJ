@@ -1,0 +1,15 @@
+{
+  admin off
+}
+
+:{$PORT} {
+  root * /app/dist
+  try_files {path} /index.html
+  file_server
+
+  # Proxy les appels front → API publique (ne rien strip, on garde /api/…)
+  @api path /api*
+  handle @api {
+    reverse_proxy {$API_ORIGIN}
+  }
+}
