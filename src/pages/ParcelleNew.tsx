@@ -36,7 +36,9 @@ type JobStatus = 'queued' | 'running' | 'done' | 'failed';
 
 // 👉 FRONT -> API PYTHON
 const USE_MOCK = false; // mets à true si tu veux tester sans backend
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000';
+// Utilise le proxy Caddy en prod (same-origin). Optionnel: VITE_API_BASE peut surcharger.
+const API_BASE = (import.meta.env.VITE_API_BASE ?? '').replace(/\/$/, '');
+
 
 // N'afficher que ces 3 classes
 const ALLOWED: ZoneClass[] = ['bare_soil', 'crop', 'forest'];
