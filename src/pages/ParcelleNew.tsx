@@ -17,6 +17,8 @@ import { ArrowLeft, MapPin, Save } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, Circle, Polygon, useMap, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import * as turf from '@turf/turf';
+// Prod : URL relative (via proxy Caddy). Dev : .env local peut surcharger.
+const API_BASE = (import.meta.env.VITE_API_BASE ?? '').replace(/\/$/, '');
 
 // ------------------------------
 // Types & Config (3 masques uniquement)
